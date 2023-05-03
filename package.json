@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "nodemailer": "^6.9.1"
+  },
+  "scripts": {
+    "server": "node sendEmail.js"
+  }
+}

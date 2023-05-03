@@ -1,0 +1,39 @@
+# 脚本机器人的名字
+name: 'BirthdayBot'
+
+# 触发条件
+on:
+  workflow_dispatch:
+  watch:
+    types: [ started ]
+  schedule:
+    - cron: '30 22 * * *'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # 使用actions/checkout@v2获取仓库代码
+      - name: 'Checkout'
+        uses: actions/checkout@v2
+
+      # 设置 node 环境
+      - name: Install Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14.x'
+
+      # 安装库
+      - name: 'Install dependencies'
+        run: pip3 install -r ./requirements.txt
+
+      # 执行
+      - name: 'Run Project'
+        env:
+          SENDER: ${{ secrets.SENDER }}
+          MAIL_PASS: ${{ secrets.MAIL_PASS }}
+          RECEIVERS: ${{ secrets.RECEIVERS }}
+          KEY: ${{ secrets.KEY }}
+          WEBHOOK: ${{ secrets.WEBHOOK }}
+          SECRET: ${{ secrets.SECRET }}
+        run: npm install && npm run server # 安装依赖，执行server
