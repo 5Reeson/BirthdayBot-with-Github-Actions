@@ -15,6 +15,9 @@ const htmlStr = `
   </body>
 </html>
 `
+console.log("test here:")
+console.log("env:",process.env.SENDER)
+
 const get_env = (key) => {
     let env_val = process.env.key;
     if(env_val == undefined){
