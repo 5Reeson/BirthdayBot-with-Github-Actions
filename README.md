@@ -1,6 +1,9 @@
 # BirthdayBot-with-Github-Actions
+
 本项目是一个生日/重要纪念日自动提醒bot。使用`GitHub Actions`，在朋友生日/重要节假日前，通过邮件/短信等方式自动提醒。朋友生日的数据全部托管在`GitHub`上，一次配置永久使用，防止忘记～
-# Todo-List
+
+## Todo-List
+
 - [x] 构建一个简单的邮件发送 demo
 - [ ] 支持短信服务
 - [ ] 节日自动配置（母亲节、父亲节）

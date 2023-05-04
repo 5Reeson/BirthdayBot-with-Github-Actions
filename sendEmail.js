@@ -6,8 +6,8 @@ let transporter = nodemailer.createTransport({
     port: '465',
     secureConnection: true,
     auth: {
-      user:'764432291@qq.com',
-      pass:"ekrqgwdaxejhbeeb"
+      user: get_env("SENDER"),
+      pass: get_env("MAIL_PASS"),
     },
 });
 
@@ -25,9 +25,17 @@ const htmlStr = `
   </body>
 </html>
 `
+const get_env = (key) => {
+    let env_val = process.env.key;
+    if(env_val == undefined){
+        return error("对于输入的key:",key,",没有设置环境变量");
+    } else {
+        return env_val;
+    }
+}
 
 const mailOptions = {
-    from: '764432291@qq.com',
+    from: get_env("SENDER"),
     to: 'RuizhengWu@outlook.com',
     subject: '一封测试邮件',
     html: htmlStr
