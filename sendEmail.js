@@ -32,13 +32,16 @@ let transporter = nodemailer.createTransport({
     port: '465',
     secureConnection: true,
     auth: {
-      user: get_env("SENDER"),
-      pass: get_env("MAIL_PASS"),
+    //   user: get_env("SENDER"),
+    //   pass: get_env("MAIL_PASS"),
+        user: process.env.SENDER,
+        pass: process.env.MAIL_PASS
     },
 });
 
 const mailOptions = {
-    from: get_env("SENDER"),
+    // from: get_env("SENDER"),
+    from: process.env.SENDER,
     to: 'RuizhengWu@outlook.com',
     subject: '一封测试邮件',
     html: htmlStr
