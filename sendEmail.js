@@ -1,16 +1,6 @@
 const { error, info } = require('console');
 const nodemailer = require('nodemailer');
 
-let transporter = nodemailer.createTransport({
-    host: 'smtp.qq.com',
-    port: '465',
-    secureConnection: true,
-    auth: {
-      user: get_env("SENDER"),
-      pass: get_env("MAIL_PASS"),
-    },
-});
-
 const htmlStr = `
 <!DOCTYPE html>
 <html lang="en">
@@ -33,6 +23,16 @@ const get_env = (key) => {
         return env_val;
     }
 }
+
+let transporter = nodemailer.createTransport({
+    host: 'smtp.qq.com',
+    port: '465',
+    secureConnection: true,
+    auth: {
+      user: get_env("SENDER"),
+      pass: get_env("MAIL_PASS"),
+    },
+});
 
 const mailOptions = {
     from: get_env("SENDER"),
