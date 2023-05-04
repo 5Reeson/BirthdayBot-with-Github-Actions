@@ -1,0 +1,31 @@
+# 用来记录生日的配置文件
+# Birthdate: yyyy-mm-dd 的形式
+#   todo：1. 这里要做日期的兼容，比如月份写法 02 和 2
+#         2. 年份也要做兼容，允许不填写 等等
+#         3. 我感觉 都不需要年份吧...谁生日还记年份啊
+# Calendar: solor 或者 lunar, 表示不同的纪年法
+# Name: 朋友的名字
+# Email: 用户接收祝福的邮箱（这个功能可以删掉我感觉，或者非必填）
+# AdvancedDay: 设置生日提前几天提醒, 0为当天提醒 (可以传入一个数组之类的？)
+#   容错：如果不传，默认 7, 3, 1, 0 (这个应该是默认选项吧，除非特殊配置)
+#   AdvancedDay: 1
+#   AdvancedDay: [7,3,0]
+People:
+  - Birthdate: '1879-2-24'
+    Calendar: solar
+    Email: ''
+    Name: 爱因斯坦
+  - Birthdate: '1846-1-27'
+    Calendar: lunar
+    Email: ''
+    Name: 爱迪生
+  - Birthdate: '2000-07-12'
+    Calendar: solar
+    Email: ''
+    Name: 小吴
+    AdvancedDay: [7,3,0]
+  - Birthdate: '1999-11-10'
+    Calendar: solar
+    Email: ''
+    Name: 晨威
+    AdvancedDay: [7,3,0]

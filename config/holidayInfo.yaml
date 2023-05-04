@@ -1,0 +1,18 @@
+# 用于存储用户想要计算的节日
+# 可以考虑用 dayjs-holiday 这个插件来进行计算
+
+# 重要的日子，把祝福送给重要的人～
+# todo：可以 选配自己想要提醒的人 一个数组
+holidays:
+  - holiday: 母亲节
+  - holiday: 父亲节
+  - holiday: 妇女节
+  - holiday: 儿童节
+  - holiday: 重阳节
+  - holiday: 七夕节
+  - holiday: 情人节
+    people: ["前女友A","前女友B"] # 可选
+  - holiday: 教师节
+    people: ["吴老师","多老师","东东老师","贱贱老师","宿宿老师"] # 可选
+  - holiday: 感恩节
+  - holiday: 复活节
