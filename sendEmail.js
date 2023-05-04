@@ -51,7 +51,7 @@ const receiver_arr = (str) => {
 const mailOptions = {
     from: get_env("SENDER"),
     // to: 'RuizhengWu@outlook.com', 
-    to: receiver_arr(get_env("RECEIVER")), // 这里的to 既可以是string，也可以是string 数组
+    to: receiver_arr(get_env("RECEIVERS")), // 这里的to 既可以是string，也可以是string 数组
     subject: '一封测试邮件',
     html: htmlStr
 };
