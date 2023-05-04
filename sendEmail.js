@@ -15,8 +15,6 @@ const htmlStr = `
   </body>
 </html>
 `
-console.log("test here:")
-console.log("env:",process.env.SENDER)
 
 const get_env = (key) => {
     let env_val = process.env[key]; // 获取对应参数的环境变量
@@ -34,15 +32,26 @@ let transporter = nodemailer.createTransport({
     auth: {
       user: get_env("SENDER"),
       pass: get_env("MAIL_PASS"),
-        // user: process.env.SENDER,
-        // pass: process.env.MAIL_PASS
     },
 });
 
+const receiver_arr = (str) => {
+    let arr = str.split(";");
+    if(arr.length > 1) // 正确配置了多个邮箱，直接返回
+        return arr;
+    else{ // 只配置了一个邮箱，或者分隔符有问题
+        if(arr[0].length == 0)
+            return error("出错，空字符串")
+        if(arr[0].indexOf("@") !== arr[0].lastIndexOf("@"))
+            return error("非法的邮件接收者，请检查分隔符是否是英文分号")
+        return arr;
+    }
+}
+
 const mailOptions = {
     from: get_env("SENDER"),
-    // from: process.env.SENDER,
-    to: 'RuizhengWu@outlook.com',
+    // to: 'RuizhengWu@outlook.com', 
+    to: receiver_arr(get_env("RECEIVER")), // 这里的to 既可以是string，也可以是string 数组
     subject: '一封测试邮件',
     html: htmlStr
 };
