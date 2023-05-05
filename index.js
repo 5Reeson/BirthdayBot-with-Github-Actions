@@ -10,8 +10,15 @@ const fs = require('fs');           // node 的文件处理库
 const yaml = require('js-yaml');    // yaml 处理库
 const dayjs = require('dayjs');     // 引入 dayjs 时间处理库
 const lunar_trans = require('js-calendar-converter');
+
+// 导入 dayjs 需要的所有插件
 var customParseFormat = require('dayjs/plugin/customParseFormat')
+var utc = require('dayjs/plugin/utc')
+var timezone = require('dayjs/plugin/timezone') // dependent on utc plugin
 dayjs.extend(customParseFormat);
+dayjs.extend(utc)
+dayjs.extend(timezone)
+dayjs.tz.setDefault("Asia/Shanghai") // 设置默认时区
 
 // import dayjs from 'dayjs';  // 引入 dayjs 时间处理库
 // import fs from 'fs';        // node 的文件处理库
