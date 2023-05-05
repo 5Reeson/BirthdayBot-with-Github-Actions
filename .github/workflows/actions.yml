@@ -32,3 +32,7 @@ jobs:
           WEBHOOK: ${{ secrets.WEBHOOK }}
           SECRET: ${{ secrets.SECRET }}
         run: npm install && npm run server # 安装依赖，执行server
+      
+      # 测试 index.js
+      - name: 'Test Index.js'
+        run: node index.js
