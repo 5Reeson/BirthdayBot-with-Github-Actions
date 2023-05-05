@@ -34,6 +34,8 @@ try{
 // 2. 遍历数组，利用 dayjs 计算时间差
 var now = dayjs();
 var reminds = []; // 对应发送邮件那块的提醒0，存储所有需要提醒的信息，把这个作为参数传出去
+console.log("看看线上时间")
+console.log(now.format('YYYY-MM-DD HH:mm:ss'))
 for(let people of birthdayInfo){
     // 属性
     const birthdate = people.Birthdate;
@@ -108,7 +110,7 @@ for(let people of birthdayInfo){
     }
 
     // 公共逻辑提出来
-    
+    console.log("name:",name,"diff:",diffInDays);
     for(let advanced of advancedDay){
         if(advanced == diffInDays){
             console.log("存入 reminds 数组")
@@ -134,7 +136,8 @@ for(let people of birthdayInfo){
 
 // 发送邮件, reminds 作为参数～（应该还要拼接上 holidayInfo）
 console.log("这里发送邮件")
-sendEmail(reminds);
+if(reminds.length > 0)
+    sendEmail(reminds);
 
 // console.log("现在:","2023-01-10");
 // console.log("测试农历年:",lunar_trans.solar2lunar("2023","01","10").lunarDate);
