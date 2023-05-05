@@ -18,7 +18,6 @@ var timezone = require('dayjs/plugin/timezone') // dependent on utc plugin
 dayjs.extend(customParseFormat);
 dayjs.extend(utc)
 dayjs.extend(timezone)
-dayjs.tz.setDefault("Asia/Shanghai") // 设置默认时区
 
 // import dayjs from 'dayjs';  // 引入 dayjs 时间处理库
 // import fs from 'fs';        // node 的文件处理库
@@ -39,7 +38,7 @@ try{
     console.log("YAML 文件格式错误")
 }
 // 2. 遍历数组，利用 dayjs 计算时间差
-var now = dayjs();
+var now = dayjs().tz("Asia/Shanghai");
 var reminds = []; // 对应发送邮件那块的提醒0，存储所有需要提醒的信息，把这个作为参数传出去
 console.log("看看线上时间")
 console.log(now.format('YYYY-MM-DD HH:mm:ss'))
