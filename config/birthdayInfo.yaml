@@ -24,6 +24,11 @@ People:
     Email: ''
     Name: 小吴
     AdvancedDay: [7,3,0]
+  - Birthdate: '2000-05-16'
+    Calendar: solar
+    Email: ''
+    Name: 宿宿
+    AdvancedDay: [7,3,0]
   - Birthdate: '11-10'
     Calendar: solar
     Email: ''
@@ -39,12 +44,12 @@ People:
     Email: ''
     Name: 测试2
     AdvancedDay: [7,3]
-  - Birthdate: '5-1'
+  - Birthdate: '5-7'
     Calendar: solar
     Email: ''
     Name: 测试3
     AdvancedDay: [7,3]
-  - Birthdate: '2000-05-08'
+  - Birthdate: '2000-05-09'
     Calendar: solar
     Email: ''
     Name: 测试4
