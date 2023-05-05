@@ -4,6 +4,7 @@
 const fs = require('fs');           // node 的文件处理库
 const yaml = require('js-yaml');    // yaml 处理库
 const dayjs = require('dayjs');     // 引入 dayjs 时间处理库
+const lunar_trans = require('js-calendar-converter');
 var customParseFormat = require('dayjs/plugin/customParseFormat')
 dayjs.extend(customParseFormat);
 
@@ -45,6 +46,7 @@ for(let people of birthdayInfo){
     // 0. 时区问题，要 push 之后测试一下
     // 1. 用户可以输入年份或者不输入年份；（“2000-07-12”）或者("07-12") 做容错
     // 2. 对于这个天数差的判断，要分 “同年” 和 “不同年”，做个逻辑处理哈
+    // 3. 农历处理，这里又要结合年份了（其实无所谓？）
     //      比如现在是 2023.12.28， 
     //      对于 12.25 应该用 2024.12.25 来计算，
     //      对于 01.01 也应该用 2024.01.01 来计算
@@ -60,6 +62,23 @@ for(let people of birthdayInfo){
                                      "YYYY-M-D",
                                      "MM-DD","M-DD","MM-D","M-D"]);
     var birthday_calculate = recordedBirthday.clone(); // 复制一份，用于计算天数差
+
+    // 如果是农历，需要进行转化 (有点复杂啊烙铁...)
+    if(calendar == "lunar"){
+        // 先算出此时此刻，在农历算哪一年
+        let cur_lunar_year = lunar_trans.solar2lunar(now.year(),now.month()+1,now.date()).lYear;
+        console.log("此时此刻的农历年:", cur_lunar_year);
+        // 用当前的农历年 + 记录的农历月/日 计算出公历日期
+        let {cDay, cMonth, cYear} = lunar_trans.lunar2solar(cur_lunar_year, recordedBirthday.month()+1, recordedBirthday.date());
+        console.log("农历日期:", now.year(), recordedBirthday.month()+1, recordedBirthday.date());
+        console.log("转换后日期:", cYear, cMonth, cDay); // 这里如果出现 比如说农历是12月29号啥的 会跨年，怎么处理呢
+        var solar_str = ""+cYear+"-"+cMonth+"-"+cDay;
+        var solar_date = dayjs(cYear+"-"+cMonth+"-"+cDay,"YYYY-M-D")
+        console.log("看看")
+        console.log(solar_str)
+    }
+
+
     // 如果用户输入的日期是 "YYYY-MM-DD" 格式，比如 "2000-07-12"
     // 需要把这里的 "YYYY" 统一转换到当前的年份进行计算
     if(birthday_calculate.year() != now.year())
@@ -83,3 +102,16 @@ for(let people of birthdayInfo){
         }
     }
 }
+console.log("现在:","2023-01-10");
+console.log("测试农历年:",lunar_trans.solar2lunar("2023","01","10").lunarDate);
+console.log("朋友1生日 农历12月25")
+let test = lunar_trans.lunar2solar("2022","12","25")
+console.log("朋友1生日 公历:",test.date);
+console.log("朋友2生日 农历1月8")
+let test2 = lunar_trans.lunar2solar("2023","01","08")
+console.log("朋友2生日 公历:",test2.date);
+
+
+// 现在：2023-01-10
+// 朋友生日: 农历12月20
+// 

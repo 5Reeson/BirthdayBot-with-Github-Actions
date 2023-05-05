@@ -49,3 +49,8 @@ People:
     Email: ''
     Name: 测试4
     AdvancedDay: [7,3]
+  - Birthdate: '2000-05-09'
+    Calendar: lunar
+    Email: ''
+    Name: 测试4
+    AdvancedDay: [7,3]
