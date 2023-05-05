@@ -50,7 +50,7 @@ const sendEmail = (reminds) => {
                     remind =>
                     `<li>姓名：${remind.name}，还有 ${remind.diff} 天就要过生日了！
                         公历生日：${remind.solar_birthday}，
-                        阳历生日：${remind.lunar_birthday == null ? "未记录" : remind.lunar_birthday},
+                        农历生日：${remind.lunar_birthday == null ? "未记录" : remind.lunar_birthday},
                         过生日时的年龄是：${remind.age == null ? "未记录" : remind.age}
                     </li>`
                 ).join('')}
