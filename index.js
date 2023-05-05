@@ -3,7 +3,7 @@
 
 // 自己的函数
 // 引入 sendEmail 函数
-const sendEmail = require('./path/to/your/file');
+const sendEmail = require('./sendEmail');
 
 // 外部库
 const fs = require('fs');           // node 的文件处理库
