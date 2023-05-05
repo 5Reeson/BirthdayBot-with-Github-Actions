@@ -13,6 +13,13 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      SENDER: ${{ secrets.SENDER }}
+      MAIL_PASS: ${{ secrets.MAIL_PASS }}
+      RECEIVERS: ${{ secrets.RECEIVERS }}
+      KEY: ${{ secrets.KEY }}
+      WEBHOOK: ${{ secrets.WEBHOOK }}
+      SECRET: ${{ secrets.SECRET }}
     steps:
       # 使用actions/checkout@v2获取仓库代码
       - name: 'Checkout'
@@ -24,13 +31,6 @@ jobs:
 
       # 执行
       - name: 'Run Project'
-        env:
-          SENDER: ${{ secrets.SENDER }}
-          MAIL_PASS: ${{ secrets.MAIL_PASS }}
-          RECEIVERS: ${{ secrets.RECEIVERS }}
-          KEY: ${{ secrets.KEY }}
-          WEBHOOK: ${{ secrets.WEBHOOK }}
-          SECRET: ${{ secrets.SECRET }}
         run: npm install && npm run server # 安装依赖，执行server
       
       # 测试 index.js
