@@ -10,6 +10,7 @@ holidays:
   - holiday: 儿童节
   - holiday: 重阳节
   - holiday: 七夕节
+  - holiday: "5.20"
   - holiday: 情人节
     people: ["前女友A","前女友B"] # 可选
   - holiday: 教师节
