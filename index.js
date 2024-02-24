@@ -78,8 +78,8 @@ for(let people of birthdayInfo){
         // console.log("此时此刻的农历年:", cur_lunar_year);
         // 用当前的农历年 + 记录的农历月/日 计算出公历日期
         let {cDay, cMonth, cYear} = lunar_trans.lunar2solar(cur_lunar_year, recordedBirthday.month()+1, recordedBirthday.date());
-        // console.log("农历日期:", now.year(), recordedBirthday.month()+1, recordedBirthday.date());
-        // console.log("转换后日期:", cYear, cMonth, cDay); // 这里如果出现 比如说农历是12月29号啥的 会跨年，怎么处理呢
+        console.log("农历日期:", now.year(), recordedBirthday.month()+1, recordedBirthday.date());
+        console.log("转换后日期:", cYear, cMonth, cDay); // 这里如果出现 比如说农历是12月29号啥的 会跨年，怎么处理呢
         var solar_str = ""+cYear+"-"+cMonth+"-"+cDay;
         solar_date = dayjs(solar_str,"YYYY-M-D")
         // console.log("看看")

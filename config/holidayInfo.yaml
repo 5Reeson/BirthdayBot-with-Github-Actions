@@ -3,17 +3,30 @@
 
 # 重要的日子，把祝福送给重要的人～
 # todo：可以 选配自己想要提醒的人 一个数组
+# todo: 还要支持选配提醒天数吗？
 holidays:
-  - holiday: 母亲节
-  - holiday: 父亲节
-  - holiday: 妇女节
-  - holiday: 儿童节
-  - holiday: 重阳节
-  - holiday: 七夕节
-  - holiday: "5.20"
-  - holiday: 情人节
+  # 祝爹妈、孩子
+  - holiday: 母亲节   # 每年5月的第2个星期日
+  - holiday: 父亲节   # 每年6月的第3个星期日
+  - holiday: 妇女节   # 03.08
+  - holiday: 儿童节   # 06.01
+
+  # 中国传统节日
+  - holiday: 春节     # 农历正月初一
+  - holiday: 元宵节   # 农历正月十五
+  # - holiday: 清明节   # 农历四月四～四月六之间的一天，计算可能不精准，应该也没人清明送祝福吧
+  - holiday: 端午节   # 农历五月初五
+  - holiday: 中秋节   # 农历八月十五
+  - holiday: 重阳节   # 农历九月初九
+
+  # 祝对象
+  - holiday: 七夕节   # 农历七月初七
+  - holiday: "5.20"  # 05.20
+  - holiday: 情人节   # 02.14
     people: ["前女友A","前女友B"] # 可选
-  - holiday: 教师节
+  - holiday: 白色情人节 # 03.14
+
+  # 其他
+  - holiday: 教师节   # 09.10
     people: ["吴老师","多老师","东东老师","贱贱老师","宿宿老师"] # 可选
-  - holiday: 感恩节
-  - holiday: 复活节
+  - holiday: 感恩节   # 每年11月的第4个星期四
