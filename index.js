@@ -142,8 +142,10 @@ for(let people of birthdayInfo){
 
 // 发送邮件, reminds 作为参数～（应该还要拼接上 holidayInfo）
 console.log("这里发送邮件")
-if(reminds.length > 0)
-    sendEmail(reminds);
+console.log("reminds.length:",reminds.length);
+sendEmail(reminds);
+// if(reminds.length > 0)
+//     sendEmail(reminds);
 
 // console.log("现在:","2023-01-10");
 // console.log("测试农历年:",lunar_trans.solar2lunar("2023","01","10").lunarDate);
