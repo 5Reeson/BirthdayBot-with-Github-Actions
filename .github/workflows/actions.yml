@@ -33,6 +33,6 @@ jobs:
       - name: 'Run Project'
         run: npm install && npm run server # 安装依赖，执行server
       
-      # 测试 index.js
+      # 测试 index.js 测试
       - name: 'Test Index.js'
         run: node index.js
