@@ -4,6 +4,9 @@
 // 自己的函数
 // 引入 sendEmail 函数
 const sendEmail = require('./sendEmail');
+// 引入节日计算相关逻辑
+const holidayDates = require('./config/holidays').holidayDates;
+const calculate_WeekRule = require('./config/holidays');
 
 // 外部库
 const fs = require('fs');           // node 的文件处理库
@@ -25,23 +28,43 @@ dayjs.extend(timezone)
 
 const defaultAdvance = [7,3,1]; // 默认在生日前 7 天、3 天、1 天进行提醒
 const birthdayPath = "./config/birthdayInfo.yaml";
-const holidayPath = "./config/birthdayInfo.yaml";
+const holidayPath = "./config/holidayInfo.yaml";
 
 // 1. 读取 birthdayInfo.yaml, 存储下来
 var birthdayInfo = [];
+// 新的部分：读取 holidayInfo.yaml，存储
+var holidayInfo = [];
 try{
-    const fileContents = fs.readFileSync(birthdayPath, 'utf8');
-    const data = yaml.load(fileContents);
-    birthdayInfo = [...data.People];
+    const birthdayContents = fs.readFileSync(birthdayPath, 'utf8');
+    const birthdayData = yaml.load(birthdayContents);
+    birthdayInfo = [...birthdayData.People];
+
+    const holidayContents = fs.readFileSync(holidayPath, 'utf8');
+    const holidayData = yaml.load(holidayContents);
+    holidayInfo = [...holidayData.holidays];
 } catch (e) {
     console.log(e);
     console.log("YAML 文件格式错误")
 }
+
+
 // 2. 遍历数组，利用 dayjs 计算时间差
 var now = dayjs().tz("Asia/Shanghai");
 var reminds = []; // 对应发送邮件那块的提醒0，存储所有需要提醒的信息，把这个作为参数传出去
 console.log("看看线上时间")
 console.log(now.format('YYYY-MM-DD HH:mm:ss'))
+
+console.log("holidayDates",holidayDates)
+
+for(let oneHoliday of holidayInfo){
+    const holiday = oneHoliday.holiday;         // 节日名称
+    const people = oneHoliday.people;           // 送祝福的人，数组，选配
+    const advancedDay = oneHoliday.AdvancedDay ?    // 选配，数组
+                        oneHoliday.AdvancedDay : [...defaultAdvance]; 
+    // 要有一个系统文件，来存储所有的 holiday 信息
+    const cal_holiday = holidayDates[holiday];  // 拿到这个数组，然后做计算
+}
+
 for(let people of birthdayInfo){
     // 属性
     const birthdate = people.Birthdate;
@@ -117,6 +140,7 @@ for(let people of birthdayInfo){
 
     // 公共逻辑提出来
     console.log("name:",name,"diff:",diffInDays);
+    // 新的todo：这里要加个兜底逻辑，如果没有配置 advanced，就要走默认的了
     for(let advanced of advancedDay){
         if(advanced == diffInDays){
             console.log("存入 reminds 数组")
@@ -143,19 +167,18 @@ for(let people of birthdayInfo){
 // 发送邮件, reminds 作为参数～（应该还要拼接上 holidayInfo）
 console.log("这里发送邮件")
 console.log("reminds.length:",reminds.length);
-sendEmail(reminds);
-// if(reminds.length > 0)
-//     sendEmail(reminds);
+if(reminds.length > 0)
+    sendEmail(reminds);
 
-// console.log("现在:","2023-01-10");
-// console.log("测试农历年:",lunar_trans.solar2lunar("2023","01","10").lunarDate);
-// console.log(typeof(lunar_trans.solar2lunar("2023","01","10").lunarDate))
-// console.log("朋友1生日 农历12月25")
-// let test = lunar_trans.lunar2solar("2022","12","25")
-// console.log("朋友1生日 公历:",test.date);
-// console.log("朋友2生日 农历1月8")
-// let test2 = lunar_trans.lunar2solar("2023","01","08")
-// console.log("朋友2生日 公历:",test2.date);
+console.log("现在:","2024-02-28");
+console.log("测试农历年:",lunar_trans.solar2lunar("2024","02","28").lunarDate);
+console.log(typeof(lunar_trans.solar2lunar("2024","02","28").lunarDate))
+console.log("朋友1生日 农历12月25")
+let test = lunar_trans.lunar2solar("2023","12","25")
+console.log("朋友1生日 公历:",test.date);
+console.log("朋友2生日 农历1月8")
+let test2 = lunar_trans.lunar2solar("2024","01","08")
+console.log("朋友2生日 公历:",test2.date);
 
 
 // 现在：2023-01-10
