@@ -167,7 +167,7 @@ for(let people of birthdayInfo){
 // 发送邮件, reminds 作为参数～（应该还要拼接上 holidayInfo）
 console.log("这里发送邮件")
 console.log("reminds.length:",reminds.length);
-if(reminds.length > 0)
+if(reminds.length >= 0)
     sendEmail(reminds);
 
 console.log("现在:","2024-02-28");
